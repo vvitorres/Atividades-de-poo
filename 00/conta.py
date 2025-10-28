@@ -3,12 +3,15 @@
 import datetime
 
 class Historico:
-    def __init__(self, numero):
+    def __init__(self):
         self.data_abertura = datetime.datetime.today()
-        self.numero = numero
+        self.transacoes = []
 
-    def imprime(self, numero):
-        print(f"Data de abertura da conta {self.numero} é: {self.data_abertura}")
+    def imprime(self, conta):
+        print(f"\nData abertura da conta {conta.numero}: {self.data_abertura}")
+        print("transações: ")
+        for t in self.transacoes:
+            print("-", t)
 
 class Cliente:
     def __init__(self, nome, sobrenome, cpf):
@@ -17,15 +20,16 @@ class Cliente:
         self.cpf = cpf
 
 class Conta:
-    def __init__(self, numero, cliente, saldo, limite):
+    def __init__(self, numero, cliente, saldo, limite = 2000.0):
         self.numero = numero
         self.titular = cliente
         self.saldo = saldo
         self.limite = limite
-        self.historico = Historico(numero)
+        self.historico = Historico()
 
     def deposita(self, valor):
         self.saldo += valor
+        self.historico.transacoes.append(f"Depósito de {valor}")
 
     def saca(self, valor):
         if (self.saldo < valor):
@@ -33,9 +37,11 @@ class Conta:
         else:
             self.saldo -= valor
             return True
-    
+            self.historico.transacoes.append(f"saque de {valor}")
+
     def extrato(self, cliente):
-        print(f"Nome: {cliente.nome} \nSonbrenome: {cliente.sobrenome} \nCPF: {cliente.cpf} \nnumero: {self.numero} \nsaldo: {self.saldo}\n")
+        print(f"Nome: {cliente.nome} \nSonbrenome: {cliente.sobrenome} \nCPF: {cliente.cpf} \nNumero: {self.numero} \nSaldo: {self.saldo}\n")
+        self.historico.transacoes.append(f"tirou extrato - saldo de {self.saldo}")
 
     def transfere_para(self, destino, valor):
         retirou = self.saca(valor)
@@ -43,4 +49,5 @@ class Conta:
             return False
         else:
             destino.deposita(valor)
+            self.historico.transacoes.append(f"transferencia de {valor} para conta {destino.numero}")
             return True
