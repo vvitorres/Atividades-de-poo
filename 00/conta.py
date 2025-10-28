@@ -11,7 +11,11 @@ class Conta:
         self.saldo += valor
 
     def saca(self, valor):
-        self.saldo -= valor
+        if (self.saldo < valor):
+            return False
+        else:
+            self.saldo -= valor
+            return True
     
     def extrato(self):
         print(f"numero: {self.numero} \nsaldo: {self.saldo}")
