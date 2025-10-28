@@ -1,5 +1,15 @@
 # Vitor Vinícius Porangaba Torres - 512
 
+import datetime
+
+class Historico:
+    def __init__(self, numero):
+        self.data_abertura = datetime.datetime.today()
+        self.numero = numero
+
+    def imprime(self, numero):
+        print(f"Data de abertura da conta {self.numero} é: {self.data_abertura}")
+
 class Cliente:
     def __init__(self, nome, sobrenome, cpf):
         self.nome = nome
@@ -12,6 +22,7 @@ class Conta:
         self.titular = cliente
         self.saldo = saldo
         self.limite = limite
+        self.historico = Historico(numero)
 
     def deposita(self, valor):
         self.saldo += valor
