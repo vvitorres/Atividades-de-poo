@@ -6,3 +6,6 @@ class Conta:
         self.titular = titular
         self.saldo = saldo
         self.limite = limite
+        
+    def deposita(self, valor):
+        self.saldo += valor
