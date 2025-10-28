@@ -13,3 +13,5 @@ class Conta:
     def saca(self, valor):
         self.saldo -= valor
     
+    def extrato(self):
+        print(f"numero: {self.numero} \nsaldo: {self.saldo}")
