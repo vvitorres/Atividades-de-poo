@@ -19,3 +19,11 @@ class Conta:
     
     def extrato(self):
         print(f"numero: {self.numero} \nsaldo: {self.saldo}")
+
+    def transfere_para(self, destino, valor):
+        retirou = self.saca(valor)
+        if (retirou == False):
+            return False
+        else:
+            destino.deposita(valor)
+            return True
