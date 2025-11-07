@@ -21,11 +21,11 @@ class Cliente:
 
 class Conta:
     def __init__(self, numero, cliente, saldo, limite = 2000.0):
-        self.numero = numero
-        self.cliente = cliente
-        self.saldo = saldo
-        self.limite = limite
-        self.historico = Historico()
+        self.__numero = numero
+        self.__cliente = cliente
+        self.__saldo = saldo
+        self.__limite = limite
+        self.__historico = Historico()
 
     def imprime_hitorico(self):
         self.historico.imprime(self)
