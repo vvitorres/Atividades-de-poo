@@ -20,5 +20,6 @@ conta1.transfere_para(conta2, 200)
 conta2.transfere_para(conta1, 100)
 conta1.extrato()
 conta2.extrato()
-conta1.historico.imprime(conta1)
-conta2.historico.imprime(conta2)
+
+conta1.imprime_hitorico()
+conta2.imprime_hitorico()

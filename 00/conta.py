@@ -7,7 +7,7 @@ class Historico:
         self.data_abertura = datetime.datetime.today()
         self.transacoes = []
 
-    def imprime(self):
+    def imprime(self, conta):
         print(f"\nData abertura da conta {conta.numero}: {self.data_abertura}")
         print("transações: ")
         for t in self.transacoes:
@@ -27,6 +27,9 @@ class Conta:
         self.limite = limite
         self.historico = Historico()
 
+    def imprime_hitorico(self):
+        self.historico.imprime(self)
+
     def deposita(self, valor):
         self.saldo += valor
         self.historico.transacoes.append(f"Depósito de {valor} em {datetime.datetime.today()}")
@@ -36,8 +39,9 @@ class Conta:
             return False
         else:
             self.saldo -= valor
-            return True
             self.historico.transacoes.append(f"saque de {valor}")
+            return True
+            
 
     def extrato(self):
         print(f"Nome: {self.cliente.nome} \nSonbrenome: {self.cliente.sobrenome} \nCPF: {self.cliente.cpf} \nNumero: {self.numero} \nSaldo: {self.saldo}\n")
