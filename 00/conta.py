@@ -42,7 +42,6 @@ class Conta:
             self.historico.transacoes.append(f"saque de {valor}")
             return True
             
-
     def extrato(self):
         print(f"Nome: {self.cliente.nome} \nSonbrenome: {self.cliente.sobrenome} \nCPF: {self.cliente.cpf} \nNumero: {self.numero} \nSaldo: {self.saldo}\n")
         self.historico.transacoes.append(f"tirou extrato em {datetime.datetime.today()} - saldo de {self.saldo}")
