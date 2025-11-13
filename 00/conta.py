@@ -20,6 +20,8 @@ class Cliente:
         self.cpf = cpf
 
 class Conta:
+    __slots__ = ['_numero', '_cliente', '_saldo', '_limite', '_historico']
+
     def __init__(self, numero, cliente, saldo, limite = 2000.0):
         self._numero = numero
         self._cliente = cliente
@@ -37,7 +39,7 @@ class Conta:
             print("saldo não pode ser negativo")
         else:
             self._saldo = saldo
-            
+
     def imprime_hitorico(self):
         self.historico.imprime(self)
 
