@@ -21,12 +21,23 @@ class Cliente:
 
 class Conta:
     def __init__(self, numero, cliente, saldo, limite = 2000.0):
-        self.__numero = numero
-        self.__cliente = cliente
-        self.__saldo = saldo
-        self.__limite = limite
-        self.__historico = Historico()
+        self._numero = numero
+        self._cliente = cliente
+        self._saldo = saldo
+        self._limite = limite
+        self._historico = Historico()
 
+    @property
+    def saldo(self):
+        return self._saldo
+    
+    @saldo.setter
+    def saldo(self, saldo):
+        if (saldo < 0):
+            print("saldo não pode ser negativo")
+        else:
+            self._saldo = saldo
+            
     def imprime_hitorico(self):
         self.historico.imprime(self)
 

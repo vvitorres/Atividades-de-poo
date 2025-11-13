@@ -9,4 +9,9 @@ cliente2 = Cliente("Vinícius", "Porangaba", "555.666.777-88")
 conta2 = Conta('678-90', cliente2, 300.0, 2000.0)
 
 #print(conta1.__numero)
-print(conta1._Conta__numero)
+#print(conta1._Conta__numero)
+
+conta1.saldo = 120
+print(conta1.saldo)
+
+conta1.saldo = -30
