@@ -17,7 +17,6 @@ class Cliente:
         self.nome = nome
         self.sobrenome = sobrenome
         self.cpf = cpf
-
 class Conta:
     __slots__ = ['_numero', '_cliente', '_saldo', '_limite', '_historico', '_identificador']
     identificador = 1
@@ -32,7 +31,7 @@ class Conta:
 
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
-        
+
     @property
     def saldo(self):
         return self._saldo
@@ -71,3 +70,14 @@ class Conta:
             destino.deposita(valor)
             self.historico.transacoes.append(f"transferencia de {valor} para conta {destino.numero}")
             return True
+
+class ContaCorrente(Conta):
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa * 2
+
+    def deposita(self, valor):
+        self._saldo += valor - 0.10
+
+class ContaPoupanca(Conta):
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa * 3
