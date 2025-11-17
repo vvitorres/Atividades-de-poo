@@ -81,3 +81,14 @@ class ContaCorrente(Conta):
 class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa * 3
+        
+if __name__ == '__main__':
+    c = Conta('123-4', 'Joao', 1000.0)
+    cc = ContaCorrente('123-5', 'Jose', 1000.0)
+    cp = ContaPoupanca('123-6', 'Maria', 1000.0)
+    c.atualiza(0.01)
+    cc.atualiza(0.01)
+    cp.atualiza(0.01)
+    print(c.saldo)
+    print(cc.saldo)
+    print(cp.saldo)
