@@ -30,6 +30,9 @@ class Conta:
         self._identificador = Conta.identificador
         Conta.identificador += 1
 
+    def atualiza(self, taxa):
+        self._saldo += self._saldo * taxa
+        
     @property
     def saldo(self):
         return self._saldo
