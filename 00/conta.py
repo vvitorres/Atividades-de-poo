@@ -70,6 +70,9 @@ class Conta:
             destino.deposita(valor)
             self.historico.transacoes.append(f"transferencia de {valor} para conta {destino.numero}")
             return True
+    
+    def __str__(self):
+        return f"Dados da Conta: \nNumero: {self._numero} \nTitular: {self._cliente} \nSaldo: {self._limite} \nLimite:{self._saldo}"
 
 class ContaCorrente(Conta):
     def atualiza(self, taxa):
@@ -92,3 +95,4 @@ if __name__ == '__main__':
     print(c.saldo)
     print(cc.saldo)
     print(cp.saldo)
+    print(cc)
