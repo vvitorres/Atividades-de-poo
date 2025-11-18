@@ -88,9 +88,10 @@ class ContaCorrente(Conta):
 class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa * 3)
-class Pato:
-    def grasna():
-        print('quack')
+
+class ContaInvestimento(Conta):
+    pass
+
 class AtualizadorDeContas:
     def __init__(self, selic, saldo_total=0):
         self._selic = selic
@@ -123,13 +124,14 @@ class Banco:
 
         
 if __name__ == '__main__':
+    ci = ContaInvestimento('123-4', 'Vitor', 1000.0)
     cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
     cp = ContaPoupanca('123-7', 'Torres', 3000.0)
     cc.atualiza(0.01)
     cp.atualiza(0.01)
     print(cc.saldo)
     print(cp.saldo)
-    
+
 '''
     adc = AtualizadorDeContas(0.02)
     pato = Pato.grasna()
