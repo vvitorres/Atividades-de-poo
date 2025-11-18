@@ -47,11 +47,11 @@ class Conta(abc.ABC):
             self._saldo = saldo
 
     def imprime_hitorico(self):
-        self.historico.imprime(self)
+        self._historico.imprime(self)
 
     def deposita(self, valor):
         self.saldo += valor
-        self.historico.transacoes.append(f"Depósito de {valor} em {datetime.datetime.today()}")
+        self._historico.transacoes.append(f"Depósito de {valor} em {datetime.datetime.today()}")
 
     def saca(self, valor):
         if (self.saldo < valor):
@@ -78,6 +78,7 @@ class Conta(abc.ABC):
         return f"Dados da Conta: \nNumero: {self._numero} \nTitular: {self._cliente} \nSaldo: {self._limite} \nLimite:{self._saldo}"
 
 class ContaCorrente(Conta):
+    tipo = 'Conta Corrente'
     def atualiza(self, taxa):
         return super().atualiza(taxa * 2)
         
@@ -86,11 +87,14 @@ class ContaCorrente(Conta):
         self._saldo += valor - 0.10
         
 class ContaPoupanca(Conta):
+    tipo = 'Conta Poupança'
     def atualiza(self, taxa):
         return super().atualiza(taxa * 3)
 
 class ContaInvestimento(Conta):
-    pass
+    tipo = 'Conta Investimento'
+    def atualiza(self, taxa):
+        return super().atualiza(taxa * 5)
 
 class AtualizadorDeContas:
     def __init__(self, selic, saldo_total=0):
@@ -127,12 +131,16 @@ if __name__ == '__main__':
     ci = ContaInvestimento('123-4', 'Vitor', 1000.0)
     cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
     cp = ContaPoupanca('123-7', 'Torres', 3000.0)
+    print(ci.tipo)
+    print(cc.tipo)
+    print(cp.tipo)
+'''
+    
     cc.atualiza(0.01)
     cp.atualiza(0.01)
     print(cc.saldo)
     print(cp.saldo)
 
-'''
     adc = AtualizadorDeContas(0.02)
     pato = Pato.grasna()
     adc.roda(pato)
