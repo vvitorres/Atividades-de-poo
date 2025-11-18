@@ -1,6 +1,7 @@
 # Vitor Vinícius Porangaba Torres - 512
 
 import datetime
+import abc
 class Historico:
     def __init__(self):
         self.data_abertura = datetime.datetime.today()
@@ -17,7 +18,7 @@ class Cliente:
         self.nome = nome
         self.sobrenome = sobrenome
         self.cpf = cpf
-class Conta:
+class Conta(abc.ABC):
     __slots__ = ['_numero', '_cliente', '_saldo', '_limite', '_historico', '_identificador']
     identificador = 1
     def __init__(self, numero, cliente, saldo, limite = 2000.0):
