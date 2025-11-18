@@ -94,12 +94,21 @@ class AtualizadorDeContas:
         self._saldo_total = saldo_total
         #propriedades
     def roda(self, conta):
-        print("Saldo da Conta: {}".format(conta.saldo))
+        print(f"Saldo da Conta: {conta.saldo}")
         self._saldo_total += conta.atualiza(self._selic)
-        print("Saldo Final: {}".format(self._saldo_total))
+        print(f"Saldo Final: {self._saldo_total}")
 
+if __name__ == '__main__':
+    c = Conta('123-4', 'Vitor', 1000.0)
+    cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
+    cp = ContaPoupanca('123-6', 'Torres', 3000.0)
+    adc = AtualizadorDeContas(0.02)
+    adc.roda(c)
+    adc.roda(cc)
+    adc.roda(cp)
+    print(f'Saldo total: {adc._saldo_total}') # O saldo final é sempre igual ao saldo total
 
-'''       
+'''      
 if __name__ == '__main__':
     c = Conta('123-4', 'Joao', 1000.0)
     cc = ContaCorrente('123-5', 'Jose', 1000.0)
