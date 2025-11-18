@@ -86,17 +86,22 @@ class ContaCorrente(Conta):
 class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         return super().atualiza(taxa * 3)
-
+class Pato:
+    def grasna():
+        print('quack')
 class AtualizadorDeContas:
     def __init__(self, selic, saldo_total=0):
         self._selic = selic
         self._saldo_total = saldo_total
         #propriedades
     def roda(self, conta):
-        print(f"Saldo da Conta: {conta.saldo}")
-        self._saldo_total += conta.atualiza(self._selic)
-        print(f"Saldo Final: {self._saldo_total}")
+        try:
+            print(f"Saldo anterior da Conta: {conta.saldo}")
+            self._saldo_total += conta.atualiza(self._selic)
+            print(f"Saldo Final: {self._saldo_total}")
 
+        except AttributeError:
+            print(f'Erro: O objeto {conta} não é uma conta válida! (Não possui o método atualiza()).')
 class Banco:
     def __init__(self):
         self._lista_contas = []
@@ -108,30 +113,33 @@ class Banco:
         return self._lista_contas[posicao_conta]
 
     @property
-    def pegaTotalDeCOntas(self):
+    def pegaTotalDeContas(self):
         n = 0
         for _ in self._lista_contas:
             n += 1
         return f'O número total de contas é: {n}'
         
 if __name__ == '__main__':
+
+    adc = AtualizadorDeContas(0.02)
+    pato = Pato.grasna()
+    adc.roda(pato)
+
+'''
     c = Conta('123-4', 'Vitor', 1000.0)
     cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
     cc2 = ContaCorrente('123-6', 'porangaba', 4000.0)
     cp = ContaPoupanca('123-7', 'Torres', 3000.0)
-    adc = AtualizadorDeContas(0.02)
+    print(banco.pega_Conta(0))
+    print(banco.pegaTotalDeContas)
+    for i in banco._lista_contas:
+        adc.roda(i) 
     banco = Banco()
     banco.adiciona(c)
     banco.adiciona(cc)
     banco.adiciona(cc2)
-    banco.adiciona(cp)
-    print(banco.pega_Conta(0))
-    print(banco.pegaTotalDeCOntas)
-    for i in banco._lista_contas:
-        adc.roda(i)
+    banco.adiciona(cp)   
 
-
-'''
     
     adc.roda(c)
     adc.roda(cc)
