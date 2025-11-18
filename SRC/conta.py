@@ -77,16 +77,15 @@ class Conta:
 
 class ContaCorrente(Conta):
     def atualiza(self, taxa):
-        self._saldo += self._saldo * taxa * 2
-        return self._saldo
+        return super().atualiza(taxa * 2)
+        
 
     def deposita(self, valor):
         self._saldo += valor - 0.10
         
 class ContaPoupanca(Conta):
     def atualiza(self, taxa):
-        self._saldo += self._saldo * taxa * 3
-        return self._saldo
+        return super().atualiza(taxa * 3)
 
 class AtualizadorDeContas:
     def __init__(self, selic, saldo_total=0):
@@ -98,17 +97,47 @@ class AtualizadorDeContas:
         self._saldo_total += conta.atualiza(self._selic)
         print(f"Saldo Final: {self._saldo_total}")
 
+class Banco:
+    def __init__(self):
+        self._lista_contas = []
+
+    def adiciona(self, conta):
+        self._lista_contas.append(conta)
+    
+    def pega_Conta(self, posicao_conta):
+        return self._lista_contas[posicao_conta]
+
+    @property
+    def pegaTotalDeCOntas(self):
+        n = 0
+        for _ in self._lista_contas:
+            n += 1
+        return f'O número total de contas é: {n}'
+        
 if __name__ == '__main__':
     c = Conta('123-4', 'Vitor', 1000.0)
     cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
-    cp = ContaPoupanca('123-6', 'Torres', 3000.0)
+    cc2 = ContaCorrente('123-6', 'porangaba', 4000.0)
+    cp = ContaPoupanca('123-7', 'Torres', 3000.0)
     adc = AtualizadorDeContas(0.02)
+    banco = Banco()
+    banco.adiciona(c)
+    banco.adiciona(cc)
+    banco.adiciona(cc2)
+    banco.adiciona(cp)
+    print(banco.pega_Conta(0))
+    print(banco.pegaTotalDeCOntas)
+    for i in banco._lista_contas:
+        adc.roda(i)
+
+
+'''
+    
     adc.roda(c)
     adc.roda(cc)
     adc.roda(cp)
     print(f'Saldo total: {adc._saldo_total}') # O saldo final é sempre igual ao saldo total
-
-'''      
+      
 if __name__ == '__main__':
     c = Conta('123-4', 'Joao', 1000.0)
     cc = ContaCorrente('123-5', 'Jose', 1000.0)
