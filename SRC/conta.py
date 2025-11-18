@@ -120,18 +120,22 @@ class Banco:
         for _ in self._lista_contas:
             n += 1
         return f'O número total de contas é: {n}'
+
         
 if __name__ == '__main__':
-
+    cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
+    cp = ContaPoupanca('123-7', 'Torres', 3000.0)
+    cc.atualiza(0.01)
+    cp.atualiza(0.01)
+    print(cc.saldo)
+    print(cp.saldo)
+    
+'''
     adc = AtualizadorDeContas(0.02)
     pato = Pato.grasna()
     adc.roda(pato)
-
-'''
     c = Conta('123-4', 'Vitor', 1000.0)
-    cc = ContaCorrente('123-5', 'Vinícius', 2000.0)
-    cc2 = ContaCorrente('123-6', 'porangaba', 4000.0)
-    cp = ContaPoupanca('123-7', 'Torres', 3000.0)
+    
     print(banco.pega_Conta(0))
     print(banco.pegaTotalDeContas)
     for i in banco._lista_contas:
