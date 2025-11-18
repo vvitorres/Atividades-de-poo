@@ -30,6 +30,7 @@ class Conta(abc.ABC):
         self._identificador = Conta.identificador
         Conta.identificador += 1
 
+    @abc.abstractmethod
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
         return self._saldo
