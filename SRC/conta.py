@@ -31,6 +31,7 @@ class Conta:
 
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa
+        return self._saldo
 
     @property
     def saldo(self):
@@ -77,14 +78,28 @@ class Conta:
 class ContaCorrente(Conta):
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa * 2
+        return self._saldo
 
     def deposita(self, valor):
         self._saldo += valor - 0.10
-
+        
 class ContaPoupanca(Conta):
     def atualiza(self, taxa):
         self._saldo += self._saldo * taxa * 3
-        
+        return self._saldo
+
+class AtualizadorDeContas:
+    def __init__(self, selic, saldo_total=0):
+        self._selic = selic
+        self._saldo_total = saldo_total
+        #propriedades
+    def roda(self, conta):
+        print("Saldo da Conta: {}".format(conta.saldo))
+        self._saldo_total += conta.atualiza(self._selic)
+        print("Saldo Final: {}".format(self._saldo_total))
+
+
+'''       
 if __name__ == '__main__':
     c = Conta('123-4', 'Joao', 1000.0)
     cc = ContaCorrente('123-5', 'Jose', 1000.0)
@@ -96,3 +111,4 @@ if __name__ == '__main__':
     print(cc.saldo)
     print(cp.saldo)
     print(cc)
+'''
